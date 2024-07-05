@@ -4,8 +4,10 @@ My weekly review process consists of reviewing all of the files that I created t
 
 ## 一些话
 
-这个插件可以添加两个可以用`Ctrl+P`调用的命令，分别可以用于创建一个每周回顾文件和在输入光标处插入每周回顾列表。
-我不知道该怎么让这个仓库可以被Brat直接用...所以直接把需要放置在插件文件夹的文件扔到release了，需要自取。
+- 功能：这个插件可以添加两个可以用`Ctrl+P`调用的命令，分别可以用于创建一个每周回顾文件和在输入光标处插入每周回顾列表。
+- 使用方法：可以通过 BRAT 使用，或者直接将 release 中的压缩包解压至插件文件夹。
+- 注释：我不知道 main.ts 该如何通过 BRAT 调用，故那玩意没有测试过。 manifest.json 中我不知道修改其作者相关信息是否合适，所以我没有修改。如果需要修改的话请通过邮件提醒我，没特殊情况会在七日内会改掉。
+
 
 ## Video Walkthrough
 
