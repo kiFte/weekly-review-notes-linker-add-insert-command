@@ -2,6 +2,8 @@
 
 My weekly review process consists of reviewing all of the files that I created this week, but I found opening all of those files in Obsidian to be a bit tedious. This plugin opens all of the files you have created in the last week (how many days you want to open is configurable).
 
+这个插件可以添加两个可以用`Ctrl+P`调用的命令，分别可以用于创建一个每周回顾文件和在输入光标处插入每周回顾列表。
+
 ## Video Walkthrough
 
 [![Weekly Review Plugin Video](https://img.youtube.com/vi/U2MLHcaCbl4/0.jpg)](https://www.youtube.com/watch?v=U2MLHcaCbl4)
