@@ -90,6 +90,32 @@ export default class WeeklyReview extends Plugin {
 		return r;
 	}
 
+/*
+    插入近七天创建的文件链接到当前文档的光标位置
+    Insert links to files created in the last 7 days at the cursor position in the current document
+*/
+  async insertWeeklyReviewLinks(editor: Editor) {
+    // 获取所有 Markdown 文件 // Get all Markdown files
+    const files = this.app.vault.getMarkdownFiles();
+    
+    // 计算回顾起始日期 // Calculate the start date for the review
+    let start = window.moment(window.moment().startOf('day')).subtract(this.settings.daysAgo, "days");
+    
+    // 筛选出近7天内创建的文件，并按创建时间降序排序 // Filter out files created in the last 7 days and sort them by creation date in descending order
+    let recentFiles = files.filter(f => start.isBefore(window.moment(f.stat.ctime))).sort((a, b) => b.stat.ctime - a.stat.ctime);
+    
+    // 将这些文件的双链格式化为 Markdown 列表 // Format these files as Markdown links
+    const reviewContent = recentFiles.map(f => `- [[${f.basename}]]`).join("\n");
+    
+    // 获取光标位置 // Get the cursor position
+    const cursor = editor.getCursor();
+    
+    // 在光标位置插入内容 // Insert the content at the cursor position
+    editor.replaceRange(reviewContent, cursor);
+
+  }
+      
+
   async onload() {
 		await this.loadSettings();
 
@@ -100,7 +126,17 @@ export default class WeeklyReview extends Plugin {
 			callback: () => {
         this.startReview(this.settings.daysAgo, this.settings.mode, this.settings.location);
       }
-		});
+		})
+          // 新添加的命令：插入近7天创建的文件链接
+          // Newly added command: Insert links to files created in the last 7 days
+        this.addCommand({
+            id: 'insert-weekly-review-links',
+            name: 'Insert Weekly Review Links',
+            editorCallback: (editor, view) => {
+        this.insertWeeklyReviewLinks(editor);
+    }
+        })
+    ;
 
     // TODO Add a command that will prompt you for the number of days for this Review
     
